@@ -531,7 +531,7 @@ app.get('/datevi',async(req, res) => {
             .input('userid',sql.VarChar,userid)
             .input('pass',sql.VarChar,pass)
             .input('desig',sql.VarChar,desig)
-            .query('SELECT * FROM dbo.users WHERE userid=@userid AND pass=@pass AND desig=@desig');
+            .query('SELECT userid, pass, desig FROM dbo.users WHERE userid=@userid AND pass=@pass AND desig=@desig');
             
             if(result.recordsets.length === 0){
                 return res.status(404).send('users not found');
