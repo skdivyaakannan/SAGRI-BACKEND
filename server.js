@@ -14,29 +14,16 @@ var config = {
     "options": {
         "encrypt": false // Disable encryption
     },
-    pool: {
-        max: 10, // Maximum number of connections in the pool
-        min: 0, // Minimum number of connections in the pool
-        idleTimeoutMillis: 30000 // Connection idle timeout
-    }
+   
 }
 
-// let db = sql.connect(config, err => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log("Connection Successful!");
-// });
-let db = new sql.ConnectionPool(config)
-    .connect()
-    .then(pool => {
-        console.log('Connected to the database successfully!');
-        return pool;
-    })
-    .catch(err => {
-        console.error('Database connection failed:', err);
-        throw err; // Proper error handling
-    });
+let db = sql.connect(config, err => {
+    if (err) {
+        throw err;
+    }
+    console.log("Connection Successful!");
+});
+
 
 //final data of soil
 // app.get('/cropdetails',async(req, res) => {
@@ -561,7 +548,21 @@ app.get('/datevi',async(req, res) => {
             res.send('internal server error')
         }
     })
-
+    // const checkUser = async (userid, pass, desig) => {
+    //     try {
+    //         const pool = await poolPromise; // Use the global connection pool
+    //         const result = await pool.request()
+    //             .input('userid', sql.VarChar, userid)
+    //             .input('pass', sql.VarChar, pass)
+    //             .input('desig', sql.VarChar, desig)
+    //             .query('SELECT userid, pass, desig FROM dbo.users WHERE userid = @userid AND pass = @pass AND desig = @desig');
+    
+    //         return result.recordset;
+    //     } catch (err) {
+    //         console.error('Error querying the database:', err);
+    //         throw err; // Pass the error to the calling function
+    //     }
+    // };
 
     
 //cropCalendar
